@@ -40,19 +40,19 @@ var game = {
 
 };
 
-var gamesave = {
-    wins: 0,
-    loses: 0,
-    currWordIndex: 0,
+// var gamesave = {
+//     wins: 0,
+//     loses: 0,
+//     currWordIndex: 0,
 
-};
+// };
 
 document.onkeydown = function(event){
     var letter = event.key.toLowerCase();
     game.letterGuess(letter);
     
     if(game.lettersGuessed.indexOf(letter) >= 0){
-        console.log("You Already Guessed That!");
+        console.log("You Already Guessed That!"); //need change to alert
     }else{
         --game.guesses;
         document.getElementById("Guesses").innerHTML = game.guesses;
@@ -62,7 +62,12 @@ document.onkeydown = function(event){
     }
     if(game.guesses == 0){
         alert("You Lose!");
-        location.reload();
+        ++game.loses;
+        game.guesses = 6;
+        game.guessCount = 0;
+        game.lettersGuessed = "";
+        document.getElementById("Guesses").innerHTML = game.guesses;
+        document.getElementById("Letters").innerHTML = game.lettersGuessed;
 
     }
 //     console.log(game.word);
