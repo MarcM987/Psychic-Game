@@ -54,8 +54,15 @@ document.onkeydown = function(event){
     if(game.lettersGuessed.indexOf(letter) >= 0){
         console.log("You Already Guessed That!");
     }else{
+        --game.guesses;
+        document.getElementById("Guesses").innerHTML = game.guesses;
         game.lettersGuessed += letter + " ";
         document.getElementById("Letters").innerHTML = game.lettersGuessed;
+
+    }
+    if(game.guesses == 0){
+        alert("You Lose!");
+        location.reload();
 
     }
 //     console.log(game.word);
