@@ -6,7 +6,7 @@ var game = {
     wins: 0,
     loses: 0,
     guesses: 6,
-    wordBank: ["quantum","database", "programming", "html", "javascript", "hexadecimal", "binary", "computers"],
+    wordBank: ["kilobytes","enums", "techno", "html", "script", "machine", "binary", "computers"],
     wordBlanks: "",
     word: "",
     guessCount: 0,
