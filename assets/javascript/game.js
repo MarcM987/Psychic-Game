@@ -32,7 +32,7 @@ var game = {
             wordArry += "_";
             document.getElementById("Word").innerHTML += wordArry[i] + " ";
         }
-        this.wordBlanks = wordArry;
+        this.wordBlanks = document.getElementById("Word").innerHTML;
         
     }
 
@@ -46,13 +46,13 @@ var game = {
 //     currWordIndex: 0,
 
 // };
-
+var letArry = [["", 0], ["", 0]];
 document.onkeydown = function(event){
     var letter = event.key.toLowerCase();
     game.letterGuess(letter);
     
     if(game.lettersGuessed.indexOf(letter) >= 0){
-        alert("You Already Guessed That!");
+        // alert("You Already Guessed That!");
     }else if(game.word.indexOf(letter) >= 0){
     }
     else{
@@ -73,16 +73,22 @@ document.onkeydown = function(event){
 
     }
 
-    if(game.word.indexOf(letter) >= 0){
-
-    }
     console.log(game.word);
     if(game.word.indexOf(letter) >= 0){
-        game["wordBlanks"] = letter;
-        console.log(game.wordBlanks);
-        document.getElementById("Word").innerHTML = game.wordBlanks;
+        document.getElementById("Word").innerHTML = "";
+        for(let i = 0; i < game.wordBlanks.length; ++i){
+            if(game.word.indexOf(letter) == i && (letArry[i][0] == "")){
+                letArry[i][0] = letter;
+                letArry[i][1] = i;
+            }
+            if(letArry[i][1] == i){
+                console.log(letArry[i][1]);
+                document.getElementById("Word").innerHTML += letArry[i][0];
+            }else{
+                document.getElementById("Word").innerHTML += " _ ";
+            }
+        }
     }
+
+    
 };
-
-
-
