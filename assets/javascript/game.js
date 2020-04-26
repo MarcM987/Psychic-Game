@@ -52,12 +52,14 @@ document.onkeydown = function(event){
     game.letterGuess(letter);
     
     if(game.lettersGuessed.indexOf(letter) >= 0){
-        console.log("You Already Guessed That!"); //need change to alert
-    }else{
+        alert("You Already Guessed That!");
+    }else if(game.word.indexOf(letter) >= 0){
+    }
+    else{
         --game.guesses;
         document.getElementById("Guesses").innerHTML = game.guesses;
         game.lettersGuessed += letter + " ";
-        document.getElementById("Letters").innerHTML = game.lettersGuessed;
+        document.getElementById("Letters").innerHTML = game.lettersGuessed.toUpperCase();
 
     }
     if(game.guesses == 0){
@@ -70,12 +72,16 @@ document.onkeydown = function(event){
         document.getElementById("Letters").innerHTML = game.lettersGuessed;
 
     }
-//     console.log(game.word);
-//     if(game.word.indexOf(letter) >= 0){
-//         game["wordBlanks"] = letter;
-//         console.log(game.wordBlanks);
-//         document.getElementById("Word").innerHTML = game.wordBlanks;
-//     }
+
+    if(game.word.indexOf(letter) >= 0){
+
+    }
+    console.log(game.word);
+    if(game.word.indexOf(letter) >= 0){
+        game["wordBlanks"] = letter;
+        console.log(game.wordBlanks);
+        document.getElementById("Word").innerHTML = game.wordBlanks;
+    }
 };
 
 
