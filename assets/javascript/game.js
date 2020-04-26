@@ -46,14 +46,16 @@ var game = {
 //     currWordIndex: 0,
 
 // };
-var letArry = [["", 0], ["", 0]];
+var trueLet = "";
+var won = false;
 document.onkeydown = function(event){
     var letter = event.key.toLowerCase();
     game.letterGuess(letter);
     
     if(game.lettersGuessed.indexOf(letter) >= 0){
-        // alert("You Already Guessed That!");
+        alert("You Already Guessed That!");
     }else if(game.word.indexOf(letter) >= 0){
+        trueLet += letter;
     }
     else{
         --game.guesses;
@@ -68,22 +70,43 @@ document.onkeydown = function(event){
         game.guesses = 6;
         game.guessCount = 0;
         game.lettersGuessed = "";
+        trueLet = "";
+        won = false;
+        document.getElementById("Score").innerHTML = "Wins: " + game.wins + "<br>Loses: " + game.loses;
+        document.getElementById("Word").innerHTML = game.wordBlanks;
         document.getElementById("Guesses").innerHTML = game.guesses;
         document.getElementById("Letters").innerHTML = game.lettersGuessed;
+    }
 
+    
+    for(let i = 0; i < game.word.length; ++i){
+        if(trueLet.indexOf(game.word[i]) >= 0){
+            won = true;
+        }else{
+            won = false;
+            
+        }
+    }
+    if(won && trueLet.length == game.word.length){
+        alert("You Win!");
+        ++game.wins;
+        game.guesses = 6;
+        game.guessCount = 0;
+        game.lettersGuessed = "";
+        trueLet = "";
+        won = false;
+        document.getElementById("Score").innerHTML = "Wins: " + game.wins + "<br>Loses: " + game.loses;
+        document.getElementById("Word").innerHTML = game.wordBlanks;
+        document.getElementById("Guesses").innerHTML = game.guesses;
+        document.getElementById("Letters").innerHTML = game.lettersGuessed;
     }
 
     console.log(game.word);
     if(game.word.indexOf(letter) >= 0){
         document.getElementById("Word").innerHTML = "";
-        for(let i = 0; i < game.wordBlanks.length; ++i){
-            if(game.word.indexOf(letter) == i && (letArry[i][0] == "")){
-                letArry[i][0] = letter;
-                letArry[i][1] = i;
-            }
-            if(letArry[i][1] == i){
-                console.log(letArry[i][1]);
-                document.getElementById("Word").innerHTML += letArry[i][0];
+        for(let i = 0; i < game.word.length; ++i){
+            if(game.word.indexOf(letter) == i){
+                document.getElementById("Word").innerHTML += letter;
             }else{
                 document.getElementById("Word").innerHTML += " _ ";
             }
