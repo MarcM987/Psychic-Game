@@ -7,12 +7,13 @@ var game = {
     loses: 0,
     guesses: 6,
     wordBank: ["quantum","database", "programming", "html", "javascript", "hexadecimal", "binary", "computers"],
-    wordGuess: "",
+    wordBlanks: "",
     word: "",
     guessCount: 0,
+    letter: '',
+    lettersGuessed: "",
 
     letterGuess: function(letter){
-        alert("You guessed: " + letter);
         this.letter = letter;
         this.myWord(this.letter);
         ++this.guessCount;
@@ -20,22 +21,22 @@ var game = {
 
     myWord: function(letter){
         if(this.guessCount == 0){
-            word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
-        }
-        this.writeWord(word, letter);
+            this.word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
+            this.writeBlank(this.word, letter);
+        }        
     },
 
-    writeWord: function(word, letter){
+    writeBlank: function(word, letter){
         var wordArry = "";
         for(let i = 0; i < word.length; ++i){
-            wordArry += " _ ";
-            if(word.indexOf(letter) == i){
-                wordArry[i] = letter;
-            }
+            wordArry += "_";
+            document.getElementById("Word").innerHTML += wordArry[i] + " ";
         }
-        alert(word);
-        document.getElementById("Word").innerHTML = wordArry;
+        this.wordBlanks = wordArry;
+        
     }
+
+    
 
 };
 
@@ -49,5 +50,21 @@ var gamesave = {
 document.onkeydown = function(event){
     var letter = event.key.toLowerCase();
     game.letterGuess(letter);
+    
+    if(game.lettersGuessed.indexOf(letter) >= 0){
+        console.log("You Already Guessed That!");
+    }else{
+        game.lettersGuessed += letter + " ";
+        document.getElementById("Letters").innerHTML = game.lettersGuessed;
+
+    }
+//     console.log(game.word);
+//     if(game.word.indexOf(letter) >= 0){
+//         game["wordBlanks"] = letter;
+//         console.log(game.wordBlanks);
+//         document.getElementById("Word").innerHTML = game.wordBlanks;
+//     }
 };
+
+
 
