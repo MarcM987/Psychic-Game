@@ -1,0 +1,21 @@
+body{
+    background-color: brown;
+}
+header{
+    text-align: center;
+}
+
+
+.container{
+    margin: 200px;
+    border: 2px dotted black;
+}
+.Hangman{
+    display: block;
+    float: left;
+}
+.Game{
+    display: block;
+    float: right;
+    
+}
